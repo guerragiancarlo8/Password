@@ -1,5 +1,4 @@
 require 'rspec'
-require 'pry'
 
 class PasswordChecker
 	def initialize
