@@ -38,10 +38,27 @@ RSpec.describe PasswordChecker do
 
 	end
 
-	describe 'no_domain_no_email?' do
-		it 'checks if gsub worked' do
-			expect(@passwordchecker.no_domain_no_email? "rafa@ironhack.com").to eq("rafa@ironhack")
+	describe '#no_domain_no_email?' do
+		it 'returns true' do
+			expect(@passwordchecker.no_domain_no_email? "espectro123%","rafa@ironhack.com").to eq(true)
+		end
+
+		it 'returns false because person name' do
+			expect(@passwordchecker.no_domain_no_email? "1234rafa","rafa@ironhack.com").to eq(false)
+		end
+
+		it 'returns false because domain name' do
+			expect(@passwordchecker.no_domain_no_email? "1234ironhack","rafa@ironhack.com").to eq(false)
 		end
 	end
 
+	describe '#check_password' do
+		it 'returns true if the password passes all conditions' do
+			expect(@passwordchecker.check_password('rafa@ironhack.com','Espectro123%')).to eq(true)
+		end
+
+		it 'returns false if ANY of the conditions are valid' do
+			expect(@passwordchecker.check_password('rafa@ironhack.com','Espectrorafa123%')).to eq(false)
+		end
+	end
 end

@@ -8,7 +8,12 @@ class PasswordChecker
 
 	def check_password(email,password)
 
-		#is_bigger_than_7 password
+		if is_bigger_than_7?(password) && letter_number_symbol?(password) && no_domain_no_email?(email,password)
+			true
+		else 
+			false
+		end
+		
 	end
 
 	def is_bigger_than_7? string
@@ -38,12 +43,20 @@ class PasswordChecker
 		end
 	end
 
-	def no_domain_no_email? email
-		new_str = email.gsub(/.com|.net|.edu|.es|.co/,'')
+	def no_domain_no_email? password_string, email
+		new_str = (email.gsub(/.com|.net|.edu|.es|.co/,'')).split("@")
 
-		new_str
-
+		if !password_string.include? new_str[0]
+			if !password_string.include? new_str[1]
+				true
+			else
+				false
+			end
+		else
+			false
+		end
 	end
 end
+
 
 
