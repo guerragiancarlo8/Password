@@ -8,7 +8,7 @@ class PasswordChecker
 
 	def check_password(email,password)
 
-		if is_bigger_than_7?(password) && letter_number_symbol?(password) && no_domain_no_email?(email,password)
+		if is_bigger_than_7?(password) && letter_number_symbol?(password) && no_domain_no_email?(password, email)
 			true
 		else 
 			false
