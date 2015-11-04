@@ -22,18 +22,27 @@ class PasswordChecker
 
 	def letter_number_symbol? string
 
-		check_letters = /[A-Za-z]+/.match(string)
+		check_letters_downcase = /[a-z]+/.match(string)
+
+		check_letters_upcase = /[A-Z]+/.match(string)
 
 		check_numbers = /[0-9]+/.match(string)
 
 		check_symbols = /[@#%&*]+/.match(string)
 
 
-		if check_letters && check_numbers && check_symbols
+		if check_letters_downcase && check_letters_upcase && check_numbers && check_symbols
 			true
 		else
 			false
 		end
+	end
+
+	def no_domain_no_email? email
+		new_str = email.gsub(/.com|.net|.edu|.es|.co/,'')
+
+		new_str
+
 	end
 end
 

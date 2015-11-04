@@ -19,11 +19,28 @@ RSpec.describe PasswordChecker do
 
 	describe '#letter_number_symbol?' do
 		it 'checks for the input to include at least 1 letter, 1 number, and 1 symbol' do
-			expect(@passwordchecker.letter_number_symbol? "espectro123%").to eq(true)
+			expect(@passwordchecker.letter_number_symbol? "esPectro123%").to eq(true)
 		end
 
 		it 'checks for the input to not include at least 1 letter, 1 number, and 1 symbol. false' do
 			expect(@passwordchecker.letter_number_symbol? "espectro123").to eq(false)
+		end
+		it 'checks for uppercase' do
+			expect(@passwordchecker.letter_number_symbol?"Espectro123%").to eq (true)
+		end
+		it 'checks for no uppercase' do
+			expect(@passwordchecker.letter_number_symbol?"espectro123%").to eq (false)
+		end
+		it 'checks for downcase' do
+			expect(@passwordchecker.letter_number_symbol?"ESPECTRO123%").to eq (false)
+		end
+
+
+	end
+
+	describe 'no_domain_no_email?' do
+		it 'checks if gsub worked' do
+			expect(@passwordchecker.no_domain_no_email? "rafa@ironhack.com").to eq("rafa@ironhack")
 		end
 	end
 
